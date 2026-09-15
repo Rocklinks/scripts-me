@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel Column Matcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+<style>
+:root{
+  --bg:#e9edf3;--sd:#b9c2d0;--sl:#ffffff;
+  --accent:#4f5b93;--accent2:#6c78b8;--accent-light:#e2e5f5;
+  --text:#1e2433;--muted:#5c6478;--subtle:#98a1b3;
+  --green:#15803d;--green-light:#dcfce7;
+  --red:#dc2626;--red-light:#fee2e2;
+  --raised:8px 8px 18px var(--sd),-8px -8px 18px var(--sl);
+  --raised-sm:5px 5px 10px var(--sd),-5px -5px 10px var(--sl);
+  --inset:inset 6px 6px 12px var(--sd),inset -6px -6px 12px var(--sl);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;padding-bottom:80px}
+header{padding:32px 20px 20px}
+.hinner{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.hlogo{width:52px;height:52px;background:var(--bg);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:var(--raised);flex-shrink:0}
+.htitle h1{font-size:1.5rem;font-weight:800;letter-spacing:-.4px}
+.htitle p{font-size:.78rem;color:var(--muted);margin-top:3px;font-family:'DM Mono',monospace}
+.wrap{max-width:1040px;margin:0 auto;padding:8px 20px 0}
+.card{background:var(--bg);border-radius:22px;padding:26px;box-shadow:var(--raised);margin-bottom:22px}
+.card-title{font-size:.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.card-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--accent-light),transparent);border-radius:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.dz{border-radius:16px;background:var(--bg);box-shadow:var(--inset);padding:22px 14px;text-align:center;cursor:pointer;position:relative;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
+.dz.over{box-shadow:inset 4px 4px 8px var(--sd),inset -4px -4px 8px var(--sl);background:var(--accent-light)}
+.dz input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.dz .icon{width:44px;height:44px;border-radius:13px;background:var(--bg);box-shadow:var(--raised-sm);display:flex;align-items:center;justify-content:center}
+.dz .icon svg{width:20px;height:20px;stroke:var(--accent);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.dz .lbl{font-size:.75rem;color:var(--muted);font-weight:500}
+.dz .fn{font-size:.7rem;color:var(--green);font-family:'DM Mono',monospace;font-weight:600;word-break:break-all;padding:0 6px;display:none}
+.dz.has .fn{display:block}
+.dz.has .icon,.dz.has .lbl{display:none}
+.dz .clr{position:absolute;top:7px;right:7px;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:.65rem;padding:3px 8px;cursor:pointer;display:none;z-index:10;font-weight:700}
+.dz.has .clr{display:block}
+label.fl{font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;display:block}
+select{width:100%;border:none;border-radius:12px;padding:11px 14px;font-family:'DM Mono',monospace;font-size:.8rem;background:var(--bg);box-shadow:var(--inset);color:var(--text);outline:none;appearance:none;cursor:pointer}
+select:disabled{color:var(--subtle);cursor:not-allowed}
+.field{margin-bottom:16px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{background:var(--bg);box-shadow:var(--raised-sm);color:var(--accent);font-family:'DM Mono',monospace;font-size:.72rem;font-weight:700;padding:6px 13px;border-radius:20px}
+.chip.none{color:var(--subtle);box-shadow:var(--inset)}
+.go{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;padding:14px 34px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:9px;box-shadow:6px 6px 14px var(--sd),-3px -3px 10px var(--sl)}
+.go:hover:not(:disabled){transform:translateY(-1px)}
+.go:active:not(:disabled){box-shadow:var(--inset)}
+.go:disabled{background:var(--bg);color:var(--subtle);box-shadow:var(--inset);cursor:not-allowed}
+.status{border-radius:14px;padding:13px 18px;font-family:'DM Mono',monospace;font-size:.76rem;margin:18px 0;min-height:46px;display:flex;align-items:center;gap:10px;background:var(--bg);color:var(--muted);box-shadow:var(--inset)}
+.status.ok2{color:var(--green)}
+.status.err{color:var(--red)}
+.thead-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.thead-row h2{font-size:.85rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent)}
+.exp{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;border-radius:12px;padding:10px 24px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;box-shadow:6px 6px 14px var(--sd),-3px -3px 10px var(--sl);display:flex;align-items:center;gap:7px}
+.exp:disabled{background:var(--bg);color:var(--subtle);box-shadow:var(--inset);cursor:not-allowed}
+.tw{overflow-x:auto;border-radius:18px;box-shadow:var(--raised);background:var(--bg)}
+table{width:100%;border-collapse:collapse;font-family:'DM Mono',monospace;font-size:.78rem}
+thead th{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:12px 14px;text-align:left;font-weight:700;letter-spacing:.5px;font-size:.68rem;text-transform:uppercase}
+thead th:first-child{border-radius:18px 0 0 0}
+thead th:last-child{border-radius:0 18px 0 0}
+tbody tr{border-bottom:1px solid #d3d9e6}
+tbody td{padding:9px 14px}
+td.hl{background:var(--green-light);color:var(--green);font-weight:700}
+td.miss{background:var(--red-light);color:var(--red)}
+.em{color:var(--subtle)}
+@media(max-width:620px){.grid2,.row3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hinner">
+    <div class="hlogo">🔗</div>
+    <div class="htitle">
+      <h1>Excel Column Matcher</h1>
+      <p>Move data between sheets by matching a common column</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-title">📁 Upload Excel Files</div>
+    <div class="grid2">
+      <div>
+        <div class="dz" id="d1" ondragover="dg(event,this)" ondragleave="dl(this)" ondrop="dp(event,this,1)">
+          <button class="clr" onclick="clFile(1,event)">✕</button>
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div class="lbl">Drop or click · <b>Sheet A file</b></div>
+          <div class="fn" id="f1"></div>
+          <input type="file" accept=".xlsx,.xls,.csv" onchange="hf(this,1)">
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label class="fl">Sheet (A)</label>
+          <select id="sheetA" disabled onchange="onSheetChange()"><option>Upload a file first</option></select>
+        </div>
+      </div>
+      <div>
+        <div class="dz" id="d2" ondragover="dg(event,this)" ondragleave="dl(this)" ondrop="dp(event,this,2)">
+          <button class="clr" onclick="clFile(2,event)">✕</button>
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div class="lbl">Drop or click · <b>Sheet B file</b></div>
+          <div class="fn" id="f2"></div>
+          <input type="file" accept=".xlsx,.xls,.csv" onchange="hf(this,2)">
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label class="fl">Sheet (B)</label>
+          <select id="sheetB" disabled onchange="onSheetChange()"><option>Upload a file first</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🧩 Common Columns Found</div>
+    <div class="chips" id="chips"><span class="chip none">Upload both files to detect common columns</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚙️ Choose Mapping</div>
+    <div class="row3">
+      <div class="field">
+        <label class="fl">Match Column (key)</label>
+        <select id="matchCol" disabled><option>—</option></select>
+      </div>
+      <div class="field">
+        <label class="fl">From Column (Sheet A)</label>
+        <select id="fromCol" disabled><option>—</option></select>
+      </div>
+      <div class="field">
+        <label class="fl">To Column (Sheet B)</label>
+        <select id="toCol" disabled><option>—</option></select>
+      </div>
+    </div>
+    <button class="go" id="btn" onclick="moveData()" disabled><span>🚀</span> Move Data</button>
+  </div>
+
+  <div class="status" id="st">Ready — upload Sheet A and Sheet B to start.</div>
+
+  <div class="card" id="resCard" style="display:none">
+    <div class="thead-row">
+      <h2>📋 Sheet B Preview (updated)</h2>
+      <button class="exp" id="xbtn" onclick="downloadResult()" disabled>💾 Save</button>
+    </div>
+    <div class="tw"><div id="tw2" style="overflow-x:auto"></div></div>
+  </div>
+
+</div>
+
+<script>
+const FILES={},WB={},HEADERS={},SHEETNAME={};
+
+function dg(e,el){e.preventDefault();el.classList.add('over')}
+function dl(el){el.classList.remove('over')}
+function dp(e,el,s){e.preventDefault();el.classList.remove('over');const f=e.dataTransfer.files[0];if(f)set(s,f)}
+function hf(inp,s){const f=inp.files[0];if(f)set(s,f)}
+function clFile(s,e){
+  e.stopPropagation();FILES[s]=null;WB[s]=null;
+  const d=document.getElementById('d'+s);d.classList.remove('has');
+  document.getElementById('f'+s).textContent='';
+  d.querySelector('input').value='';
+  const sel=document.getElementById(s===1?'sheetA':'sheetB');
+  sel.innerHTML='<option>Upload a file first</option>';sel.disabled=true;
+  resetMapping();
+}
+
+function set(s,f){
+  FILES[s]=f;
+  const d=document.getElementById('d'+s);
+  d.classList.add('has');
+  document.getElementById('f'+s).textContent=f.name;
+  const reader=new FileReader();
+  reader.onload=(e)=>{
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array'});
+      WB[s]=wb;
+      const sel=document.getElementById(s===1?'sheetA':'sheetB');
+      sel.innerHTML=wb.SheetNames.map(n=>'<option value="'+n+'">'+n+'</option>').join('');
+      sel.disabled=false;
+      onSheetChange();
+    }catch(err){ss('✗ Could not read '+f.name+': '+err.message,'err');}
+  };
+  reader.readAsArrayBuffer(f);
+}
+
+function sheetHeaders(wb,sheetName){
+  const ws=wb.Sheets[sheetName];
+  const rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:''});
+  return (rows[0]||[]).map(h=>String(h).trim()).filter(h=>h!=='');
+}
+function normKey(s){return String(s).trim().toLowerCase();}
+
+function onSheetChange(){
+  resetMapping();
+  if(!WB[1]||!WB[2])return;
+  const sA=document.getElementById('sheetA').value;
+  const sB=document.getElementById('sheetB').value;
+  if(!sA||!sB)return;
+  SHEETNAME.A=sA;SHEETNAME.B=sB;
+  HEADERS.A=sheetHeaders(WB[1],sA);
+  HEADERS.B=sheetHeaders(WB[2],sB);
+
+  const setA=new Set(HEADERS.A.map(normKey));
+  const common=HEADERS.B.filter(h=>setA.has(normKey(h)));
+
+  const chipsEl=document.getElementById('chips');
+  if(common.length){
+    chipsEl.innerHTML=common.map(c=>'<span class="chip">'+c+'</span>').join('');
+  }else{
+    chipsEl.innerHTML='<span class="chip none">No matching column names found</span>';
+  }
+
+  const matchSel=document.getElementById('matchCol');
+  const fromSel=document.getElementById('fromCol');
+  const toSel=document.getElementById('toCol');
+  matchSel.innerHTML=common.length?common.map(c=>'<option>'+c+'</option>').join(''):'<option>—</option>';
+  fromSel.innerHTML=HEADERS.A.map(c=>'<option>'+c+'</option>').join('');
+  toSel.innerHTML=HEADERS.B.map(c=>'<option>'+c+'</option>').join('');
+  matchSel.disabled=!common.length;
+  fromSel.disabled=!HEADERS.A.length;
+  toSel.disabled=!HEADERS.B.length;
+  document.getElementById('btn').disabled=!(common.length&&HEADERS.A.length&&HEADERS.B.length);
+  ss(common.length?('Found '+common.length+' common column(s). Choose your mapping below.'):'No common columns — pick match/from/to manually if needed.','');
+}
+
+function resetMapping(){
+  document.getElementById('resCard').style.display='none';
+  document.getElementById('xbtn').disabled=true;
+  document.getElementById('btn').disabled=true;
+  const chipsEl=document.getElementById('chips');
+  chipsEl.innerHTML='<span class="chip none">Upload both files to detect common columns</span>';
+  ['matchCol','fromCol','toCol'].forEach(id=>{
+    const el=document.getElementById(id);el.innerHTML='<option>—</option>';el.disabled=true;
+  });
+}
+
+function ss(m,t){
+  const el=document.getElementById('st');
+  el.className='status '+(t==='ok'?'ok2':t==='err'?'err':'');
+  el.textContent=m;
+}
+
+let RESULT=null;
+function moveData(){
+  const matchCol=document.getElementById('matchCol').value;
+  const fromCol=document.getElementById('fromCol').value;
+  const toCol=document.getElementById('toCol').value;
+  if(!matchCol||!fromCol||!toCol){ss('✗ Pick match, from and to columns first.','err');return;}
+
+  const wsA=WB[1].Sheets[SHEETNAME.A];
+  const wsB=WB[2].Sheets[SHEETNAME.B];
+  const dataA=XLSX.utils.sheet_to_json(wsA,{defval:''});
+  const rangeB=XLSX.utils.decode_range(wsB['!ref']);
+  const headerRowB=[];
+  for(let c=rangeB.s.c;c<=rangeB.e.c;c++){
+    const cell=wsB[XLSX.utils.encode_cell({r:rangeB.s.r,c})];
+    headerRowB.push(cell?String(cell.v).trim():'');
+  }
+  const matchColIdxB=headerRowB.findIndex(h=>normKey(h)===normKey(matchCol));
+  const toColIdxB=headerRowB.findIndex(h=>normKey(h)===normKey(toCol));
+  if(matchColIdxB===-1||toColIdxB===-1){ss('✗ Could not locate those columns in Sheet B.','err');return;}
+
+  const lookup={};
+  dataA.forEach(r=>{
+    const k=normKey(r[matchCol]!==undefined?r[matchCol]:'');
+    if(k!=='')lookup[k]=r[fromCol];
+  });
+
+  let matched=0,unmatched=0;
+  const preview=[];
+  for(let r=rangeB.s.r+1;r<=rangeB.e.r;r++){
+    const matchCellRef=XLSX.utils.encode_cell({r,c:matchColIdxB});
+    const matchCell=wsB[matchCellRef];
+    const key=normKey(matchCell?matchCell.v:'');
+    const toRef=XLSX.utils.encode_cell({r,c:toColIdxB});
+    let status='same';
+    if(key!==''&&lookup.hasOwnProperty(key)){
+      const newVal=lookup[key];
+      if(!wsB[toRef])wsB[toRef]={t:'s',v:''};
+      wsB[toRef].v=newVal;
+      wsB[toRef].t=typeof newVal==='number'?'n':'s';
+      matched++;status='moved';
+    }else if(key!==''){
+      unmatched++;status='nomatch';
+    }
+    preview.push({key:matchCell?matchCell.v:'',val:wsB[toRef]?wsB[toRef].v:'',status});
+  }
+
+  RESULT={matched,unmatched,preview,matchCol,toCol};
+  ss('✓ Done — '+matched+' row(s) matched & moved, '+unmatched+' row(s) had no match.','ok');
+  renderPreview();
+  document.getElementById('xbtn').disabled=false;
+}
+
+function renderPreview(){
+  if(!RESULT)return;
+  const{preview,matchCol,toCol}=RESULT;
+  let html='<table><thead><tr><th>'+matchCol+'</th><th>'+toCol+' (result)</th><th>Status</th></tr></thead><tbody>';
+  preview.forEach(r=>{
+    const cls=r.status==='moved'?'hl':r.status==='nomatch'?'miss':'';
+    const statusTxt=r.status==='moved'?'Moved':r.status==='nomatch'?'No match':'—';
+    html+='<tr><td>'+(r.key||'<span class="em">—</span>')+'</td><td class="'+cls+'">'+(r.val!==''&&r.val!==undefined?r.val:'<span class="em">—</span>')+'</td><td>'+statusTxt+'</td></tr>';
+  });
+  html+='</tbody></table>';
+  document.getElementById('tw2').innerHTML=html;
+  document.getElementById('resCard').style.display='block';
+}
+
+function downloadResult(){
+  if(!WB[2])return;
+  XLSX.writeFile(WB[2],'updated-sheet-b.xlsx',{cellStyles:true});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+'========================
+' COLUMN D
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},D4:D40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},D4:D40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},D4:D40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},D4:D40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},D4:D40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},D4:D40))
+
+'========================
+' COLUMN E
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},E4:E40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},E4:E40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},E4:E40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},E4:E40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},E4:E40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},E4:E40))
+
+'========================
+' COLUMN F
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},F4:F40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},F4:F40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},F4:F40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},F4:F40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},F4:F40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},F4:F40))
+
+'========================
+' COLUMN G
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},G4:G40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},G4:G40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},G4:G40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},G4:G40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},G4:G40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},G4:G40))
+
+'========================
+' COLUMN H
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},H4:H40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},H4:H40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},H4:H40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},H4:H40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},H4:H40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},H4:H40))
+
+'========================
+' COLUMN I
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},I4:I40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},I4:I40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},I4:I40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},I4:I40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},I4:I40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},I4:I40))
+
+'========================
+' COLUMN J
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},J4:J40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},J4:J40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},J4:J40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},J4:J40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},J4:J40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},J4:J40))
+
+'========================
+' COLUMN K
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},K4:K40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},K4:K40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},K4:K40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},K4:K40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},K4:K40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},K4:K40))
+
+'========================
+' COLUMN L
+'========================
+=SUM(SUMIF(A4:A40,{"Tuticorin-1","Tuticorin-2","Thiruchendur-1","Thisayanvilai-1","Eral-2","Udankudi"},L4:L40))
+=SUM(SUMIF(A4:A40,{"Kovilpatti","Ramnad","Ramnad-2","Paramakudi","Sayalkudi-1","Villathikullam","Sattur-2","Sankarankovil-1","Kayathar-1"},L4:L40))
+=SUM(SUMIF(A4:A40,{"Virudhunagar","Virudhunagar-2","Aruppukottai","Aruppukottai -2","Sivakasi"},L4:L40))
+=SUM(SUMIF(A4:A40,{"Tirunelveli-1","Valliyur-1","Ambasamudram-1","Anjugramam-1"},L4:L40))
+=SUM(SUMIF(A4:A40,{"Nagercoil","Marthandam","Thuckalay-1","Colachel-1","Kulasekharam-1","Monday Market","Karungal-1"},L4:L40))
+=SUM(SUMIF(A4:A40,{"Thenkasi","Thenkasi-2","Surandai-1","Puliyankudi-1","Rajapalayam","Sengottai-1"},L4:L40))
